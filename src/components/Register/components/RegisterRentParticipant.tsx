@@ -4,6 +4,7 @@ import Category from './Category';
 import { useEffect, useState } from 'react';
 import { participantServices } from '../../../services/participants.service';
 import toast from 'react-hot-toast';
+import 'react-phone-number-input/style.css';
 
 function RegisterRentParticipant() {
   const {
