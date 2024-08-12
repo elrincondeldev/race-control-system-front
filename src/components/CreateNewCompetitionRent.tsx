@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { participantServices } from '../services/participants.service';
 import toast from 'react-hot-toast';
-import imageCompression from 'browser-image-compression';
+
 import Loader from './Loader';
 
 function CreateNewCompetitionRent() {
@@ -10,40 +10,40 @@ function CreateNewCompetitionRent() {
   const [regulationLink, setRegulationLink] = useState('');
   const [date, setDate] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [image, setImage] = useState<File | null>(null);
+  // const [image, setImage] = useState<File | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
 
-  const formatCompetitionName = (name: string) => {
-    const withoutAccents = name
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-    return withoutAccents.trim().toLowerCase().replace(/\s+/g, '_');
-  };
+  // const formatCompetitionName = (name: string) => {
+  //   const withoutAccents = name
+  //     .normalize('NFD')
+  //     .replace(/[\u0300-\u036f]/g, '');
+  //   return withoutAccents.trim().toLowerCase().replace(/\s+/g, '_');
+  // };
 
-  const compressImage = async (
-    imageFile: string | File | null,
-  ): Promise<File | null> => {
-    if (!imageFile) return null;
-    const options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1024,
-      useWebWorker: true,
-      fileType: 'image/jpeg',
-    };
-    try {
-      const file = imageFile instanceof File ? imageFile : new File([], '');
-      const compressedBlob = await imageCompression(file, options);
-      const compressedFile = new File(
-        [compressedBlob],
-        file.name.replace(/\.[^.]+$/, '.jpg'), // Replace file extension with .jpg
-        { type: 'image/jpeg', lastModified: Date.now() },
-      );
-      return compressedFile;
-    } catch (error) {
-      console.error('Error compressing image:', error);
-      return imageFile instanceof File ? imageFile : null;
-    }
-  };
+  // const compressImage = async (
+  //   imageFile: string | File | null,
+  // ): Promise<File | null> => {
+  //   if (!imageFile) return null;
+  //   const options = {
+  //     maxSizeMB: 1,
+  //     maxWidthOrHeight: 1024,
+  //     useWebWorker: true,
+  //     fileType: 'image/jpeg',
+  //   };
+  //   try {
+  //     const file = imageFile instanceof File ? imageFile : new File([], '');
+  //     const compressedBlob = await imageCompression(file, options);
+  //     const compressedFile = new File(
+  //       [compressedBlob],
+  //       file.name.replace(/\.[^.]+$/, '.jpg'), // Replace file extension with .jpg
+  //       { type: 'image/jpeg', lastModified: Date.now() },
+  //     );
+  //     return compressedFile;
+  //   } catch (error) {
+  //     console.error('Error compressing image:', error);
+  //     return imageFile instanceof File ? imageFile : null;
+  //   }
+  // };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

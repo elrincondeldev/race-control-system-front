@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { participantServices } from '../services/participants.service';
-import ModifyCompetition from './ModifyCompetition';
-import Participants from './Participants';
+// import ModifyCompetition from './ModifyCompetition';
+// import Participants from './Participants';
 import Loader from './Loader';
 
 function CompetitionManagementRent() {
@@ -29,12 +29,6 @@ function CompetitionManagementRent() {
   //     console.log(error);
   //   }
   // };
-
-  const closeModal = () => {
-    setView('');
-    setModifyCompetition({});
-    setParticipants([]);
-  };
 
   return (
     <main className="flex flex-col gap-5 animate-in">
@@ -136,14 +130,14 @@ function CompetitionManagementRent() {
               </tbody>
             </table>
           </div>
-          {view === 'modify-competition' ? (
+          {/* {view === 'modify-competition' ? (
             <ModifyCompetition
               modifyCompetition={modifyCompetition}
               closeModal={closeModal}
             />
           ) : view === 'view-participants' ? (
             <Participants participants={participants} closeModal={closeModal} />
-          ) : null}
+          ) : null} */}
         </>
       )}
     </main>

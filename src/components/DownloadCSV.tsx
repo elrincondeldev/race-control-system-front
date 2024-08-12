@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-
+import { participantServices } from '../services/participants.service';
 
 function DownloadCSV() {
   const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await participantsService.getParticipants();
-      setParticipants(data);
+      const data = await participantServices.getParticipants();
+
+      if (data) {
+        setParticipants(data.data);
+      }
     };
 
     fetchData();

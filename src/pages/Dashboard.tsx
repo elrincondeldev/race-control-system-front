@@ -2,15 +2,14 @@ import Header from '../components/Header';
 import { useState } from 'react';
 import CreateNewCompetitionRent from '../components/CreateNewCompetitionRent';
 import Participants from '../components/Participants';
-import ModifyCompetition from '../components/ModifyCompetition';
-import DownloadCSV from '../components/DownloadCSV';
+
 import CompetitionManagementRent from '../components/CompetitionManagementRent';
 import RentParticipants from '../components/RentParticipants';
 
 function Dashboard() {
   const [view, setView] = useState('rent-participants');
   const [participantsModal, setParticipantsModal] = useState(false); // Controla el modal de Participants
-  const [modifyCompetitionModal, setModifyCompetitionModal] = useState(false); // Controla el modal de ModifyCompetition
+  // const [modifyCompetitionModal, setModifyCompetitionModal] = useState(false); // Controla el modal de ModifyCompetition
 
   const renderView = () => {
     if (view === 'new-competition-rent') {
@@ -69,12 +68,12 @@ function Dashboard() {
           closeModal={() => setParticipantsModal(false)}
         />
       )}
-      {modifyCompetitionModal && (
+      {/* {modifyCompetitionModal && (
         <ModifyCompetition
           modifyCompetition={{}}
           closeModal={() => setModifyCompetitionModal(false)}
         />
-      )}
+      )} */}
     </main>
   );
 }

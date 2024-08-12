@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import { Navigate } from 'react-router-dom';
@@ -20,7 +19,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<RegisterRentParticipant />} />
-        <Route path="/:competition" element={<Home />} />
         <Route
           path="/login"
           element={accessToken ? <Navigate to={'/dashboard'} /> : <Login />}
