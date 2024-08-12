@@ -14,8 +14,8 @@ const Login = () => {
     try {
       const response = await userServices.login({ username, password });
       if (response?.status === 200) {
-        console.log(response.data.access_token);
         addTokenToLocalStorage(response.data.access_token);
+        window.location.href = '/dashboard';
       }
     } catch (error) {
       console.log(error);
