@@ -16,7 +16,7 @@ function AttachFiles() {
     const file = event.target.files && event.target.files[0];
     if (file) {
       const blob = await readFileAsBlob(file);
-      setFile(event.target.files[0]);
+      setFile(blob);
     }
   };
 
