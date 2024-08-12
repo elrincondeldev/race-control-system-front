@@ -6,7 +6,6 @@ import { addTokenToLocalStorage } from '../helpers/localStorageLoginSession';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -68,7 +67,6 @@ const Login = () => {
               Login
             </button>
           </form>
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
         </div>
       )}
     </div>

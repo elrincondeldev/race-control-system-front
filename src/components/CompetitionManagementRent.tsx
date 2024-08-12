@@ -5,10 +5,10 @@ import { participantServices } from '../services/participants.service';
 import Loader from './Loader';
 
 function CompetitionManagementRent() {
-  const [participants, setParticipants] = useState<any[]>([]);
+  // const [participants, setParticipants] = useState<any[]>([]);
   const [competitions, setCompetitions] = useState<any[]>([]);
-  const [modifyCompetition, setModifyCompetition] = useState<any>({});
-  const [view, setView] = useState('');
+  // const [modifyCompetition, setModifyCompetition] = useState<any>({});
+  // const [view, setView] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
