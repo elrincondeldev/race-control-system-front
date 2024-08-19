@@ -58,16 +58,16 @@ function CompetitionManagementRent() {
                     </td>
                     <td className="px-4 py-2 md:px-6 md:py-4">
                       <a
-                        href={`http://localhost:5173/${competition.competition_id}`}
+                        href={`https://www.racecontrolsystem.com/`}
                         target="_blank"
                         className="text-blue-500 hover:underline"
                       >
-                        http://localhost:5173/{competition.competition_id}
+                        https://www.racecontrolsystem.com/
                       </a>
                     </td>
                     <td className="px-4 py-2 md:px-6 md:py-4">
                       <a
-                        href={competition.regulation_url}
+                        href={'https://www.racecontrolsystem.com/'}
                         target="_blank"
                         className="text-blue-500 hover:underline"
                       >
