@@ -16,6 +16,7 @@ const Login = () => {
       if (response?.status === 200) {
         addTokenToLocalStorage(response.data.access_token);
         window.location.href = '/dashboard';
+        location.reload();
       }
     } catch (error) {
       console.log(error);
