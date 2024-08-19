@@ -257,10 +257,9 @@ function RegisterRentParticipant() {
             </label>
           </div>
           <p className="text-center text-sm sm:text-base">
-            El concursante declara conocer los reglamentos que rigen los
-            campeonatos de España de karting, así como el código deportivo
-            internacional, aceptándolos sin ninguna reserva y se compromete a
-            cumplir cuantas normas complementarias sean dictadas
+            El equipo declara conocer las normas de competición, así como el uso
+            correcto del material. Se podrá exigir al equipo el importe del daño
+            causado así como la expulsión del evento.
           </p>
           <p className="font-bold">Precio por equipo: {price} €</p>
           <p className="font-bold">Fecha de la competición: {date}</p>
