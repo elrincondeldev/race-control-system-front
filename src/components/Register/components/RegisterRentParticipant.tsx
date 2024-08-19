@@ -51,14 +51,19 @@ function RegisterRentParticipant() {
   const [comeptitionCategories, setCompetitionCategories] = useState([]);
   const [competitionName, setCompetitionName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [price, setPrice] = useState('');
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await participantServices.getActiveCompetition();
 
       if (response?.data) {
+        console.log(response.data[0]);
         setCompetitionCategories(response.data[0].categories);
         setCompetitionName(response.data[0].competition_name);
+        setPrice(response.data[0].inscription_price);
+        setDate(response.data[0].date);
       }
     };
 
@@ -258,6 +263,8 @@ function RegisterRentParticipant() {
             internacional, aceptándolos sin ninguna reserva y se compromete a
             cumplir cuantas normas complementarias sean dictadas
           </p>
+          <p className='font-bold'>Precio por equipo: {price} €</p>
+          <p className='font-bold'>Fecha de la competición: {date}</p>
         </div>
       </div>
       <div className="m-auto">
