@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { participantServices } from '../../../services/participants.service';
 import toast from 'react-hot-toast';
 import 'react-phone-number-input/style.css';
+import Loader from '../../Loader';
 
 function RegisterRentParticipant() {
   const {
@@ -49,11 +50,11 @@ function RegisterRentParticipant() {
 
   const [comeptitionCategories, setCompetitionCategories] = useState([]);
   const [competitionName, setCompetitionName] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await participantServices.getActiveCompetition();
-      console.log(response);
 
       if (response?.data) {
         setCompetitionCategories(response.data[0].categories);
@@ -111,6 +112,8 @@ function RegisterRentParticipant() {
     try {
       const response = await participantServices.registerParticipant(data);
 
+      setLoading(true);
+
       if (response?.data) {
         toast.success('Inscripción realizada correctamente.');
 
@@ -123,8 +126,10 @@ function RegisterRentParticipant() {
         setEmail('');
         setDriverTeam('');
         setTermsAndConditions(false);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       toast.error('Ha ocurrido un error al enviar la inscripción.');
     }
   };
@@ -132,16 +137,20 @@ function RegisterRentParticipant() {
   return (
     <form
       onSubmit={onSubmitForm}
-      className="flex flex-col gap-10 max-w-[800px] m-auto my-10 animate-in"
+      className="flex flex-col gap-10 max-w-[800px] m-auto my-10 animate-in p-4 sm:p-8"
     >
-      <h1 className="ethnocentric text-4xl text-center">{competitionName}</h1>
-      <img src="src/assets/gokartporriño.jpg" alt="" />
+      <h1 className="ethnocentric text-2xl sm:text-4xl text-center">
+        {competitionName}
+      </h1>
       <Category competitionCategories={comeptitionCategories} />
-      <div className="flex flex-col gap-7 p-7 bg-white rounded-md shadow-lg">
-        <label className="ethnocentric text-4xl" htmlFor="contestant">
+      <div className="flex flex-col gap-7 p-5 sm:p-7 bg-white rounded-md shadow-lg">
+        <label
+          className="ethnocentric text-xl sm:text-4xl"
+          htmlFor="contestant"
+        >
           Piloto
         </label>
-        <div className="flex gap-7">
+        <div className="flex flex-col sm:flex-row gap-7">
           <div className="flex flex-col w-full">
             <label htmlFor="name">Nombre</label>
             <input
@@ -167,7 +176,7 @@ function RegisterRentParticipant() {
             />
           </div>
         </div>
-        <div className="flex gap-7">
+        <div className="flex flex-col sm:flex-row gap-7">
           <div className="flex flex-col w-full">
             <label htmlFor="nif">NIF</label>
             <input
@@ -190,7 +199,7 @@ function RegisterRentParticipant() {
             />
           </div>
         </div>
-        <div className="flex gap-7">
+        <div className="flex flex-col sm:flex-row gap-7">
           <div className="flex flex-col w-full">
             <label htmlFor="date">Fecha de nacimiento</label>
             <input
@@ -216,21 +225,21 @@ function RegisterRentParticipant() {
             />
           </div>
         </div>
-        <div className="flex gap-7">
+        <div className="flex flex-col gap-7">
           <div className="flex flex-col w-full">
             <label>Nombre del equipo</label>
             <input
-              id="email"
+              id="team"
               value={driver_team}
               name="team"
-              type="team"
-              placeholder="Introduce el email del piloto"
+              type="text"
+              placeholder="Introduce el nombre del equipo"
               className="shadow-lg p-3 rounded-md"
               onChange={(e) => setDriverTeam(e.target.value)}
             />
           </div>
         </div>
-        <div className="flex flex-col items-center gap-4 m-auto ">
+        <div className="flex flex-col items-center gap-4 m-auto">
           <div className="flex gap-3">
             <input
               id="terms"
@@ -243,26 +252,26 @@ function RegisterRentParticipant() {
               Acepto los términos y condiciones
             </label>
           </div>
-          <p className="text-center">
+          <p className="text-center text-sm sm:text-base">
             El concursante declara conocer los reglamentos que rigen los
             campeonatos de España de karting, así como el código deportivo
             internacional, aceptándolos sin ninguna reserva y se compromete a
             cumplir cuantas normas complementarias sean dictadas
           </p>
-          {/* <button
-          onClick={handleSubmit}
-          className="p-3 bg-blue-500 text-white rounded-md"
-        >
-          Enviar
-        </button> */}
         </div>
       </div>
       <div className="m-auto">
-        <input
-          type="submit"
-          value="Enviar Inscripción"
-          className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
-        />
+        {loading ? (
+          <div className="bg-black text-white py-4 px-6 rounded-md hover:bg-[#222]">
+            <Loader />
+          </div>
+        ) : (
+          <input
+            type="submit"
+            value="Enviar Inscripción"
+            className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
+          />
+        )}
       </div>
     </form>
   );

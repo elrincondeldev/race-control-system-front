@@ -1,73 +1,49 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { participantServices } from '../services/participants.service';
 import PdfReader from './PdfReader';
 import { PDFViewer } from '@react-pdf/renderer';
 import Loader from './Loader';
 
+import { ParticipantType, ParticipantsGrouped } from './types';
+
 function RentParticipants() {
-  const [participants, setParticipants] = useState([]);
-  const [pdf, setPdf] = useState(false);
-  const [selectedParticipant, setSelectedParticipant] = useState(null);
+  const [participants, setParticipants] = useState<ParticipantType[]>([]);
+  const [pdf, setPdf] = useState<boolean>(false);
+  const [selectedParticipant, setSelectedParticipant] =
+    useState<ParticipantType | null>(null);
+  const [groupedParticipants, setGroupedParticipants] =
+    useState<ParticipantsGrouped>({});
+  const [totalTeams, setTotalTeams] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await participantServices.getParticipants();
-      setParticipants(response?.data);
+      const participants: ParticipantType[] = response?.data || [];
+
+      const teams = participants.reduce<ParticipantsGrouped>(
+        (acc, participant) => {
+          const team = participant.driver_team || 'Sin equipo';
+          if (!acc[team]) {
+            acc[team] = [];
+          }
+          acc[team].push(participant);
+          return acc;
+        },
+        {},
+      );
+
+      setParticipants(participants);
+      setGroupedParticipants(teams);
+      setTotalTeams(Object.keys(teams).length);
     };
 
     fetchData();
   }, []);
 
-  const downloadPdf = (participant: any) => {
+  const downloadPdf = (participant: ParticipantType) => {
     setSelectedParticipant(participant);
     setPdf(true);
   };
-
-  // const downloadImage = (image_id: string) => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await rentCompetitionsService.downloadImage(image_id);
-
-  //       // Verifica si la respuesta contiene datos válidos
-  //       if (response?.data) {
-  //         // Convierte la cadena base64 en un ArrayBuffer
-  //         const arrayBuffer = base64ToArrayBuffer(response.data);
-
-  //         // Crea un Blob a partir del ArrayBuffer
-  //         const blob = new Blob([arrayBuffer], {
-  //           type: response.headers['content-type'],
-  //         });
-
-  //         // Crea una URL de objeto y descarga el archivo
-  //         const url = URL.createObjectURL(blob);
-  //         const a = document.createElement('a');
-  //         a.href = url;
-  //         a.download = image_id; // Nombre del archivo de descarga
-  //         document.body.appendChild(a); // Añadir el enlace al DOM
-  //         a.click(); // Simular un clic en el enlace
-  //         a.remove(); // Remover el enlace del DOM
-  //         window.URL.revokeObjectURL(url); // Liberar la URL del Blob
-  //       } else {
-  //         console.error('No se recibieron datos válidos para la imagen.');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error downloading the image:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // };
-
-  // Función para convertir cadena base64 en ArrayBuffer
-  // function base64ToArrayBuffer(base64: string): ArrayBuffer {
-  //   const binaryString = window.atob(base64);
-  //   const length = binaryString.length;
-  //   const bytes = new Uint8Array(length);
-  //   for (let i = 0; i < length; i++) {
-  //     bytes[i] = binaryString.charCodeAt(i);
-  //   }
-  //   return bytes.buffer;
-  // }
 
   return (
     <main className="flex flex-col gap-5 mb-10 animate-in">
@@ -98,64 +74,58 @@ function RentParticipants() {
                   <th scope="col" className="px-6 py-3">
                     Equipo
                   </th>
+                  <th scope="col" className="px-6 py-3">
+                    Descargar PDF
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {participants.map((participant: any) => (
-                  <tr
-                    key={participant.driver_nif}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {participant.category}
-                    </th>
-                    <td className="px-6 py-4">{participant.driver_name}</td>
-                    <td className="px-6 py-4">{participant.driver_lastname}</td>
-                    <td className="px-6 py-4">{participant.driver_nif}</td>
-                    <td className="px-6 py-4">
-                      {participant.driver_birthdate}
-                    </td>
-                    <td className="px-6 py-4">{participant.driver_phone}</td>
-                    <td className="px-6 py-4">{participant.driver_team}</td>
-                    {/* <td
-                      className="px-6 py-4 cursor-pointer"
-                      onClick={() =>
-                        downloadImage(participant.contestant_license_file)
-                      }
-                    >
-                      Descargar
-                    </td>
-                    <td
-                      className="px-6 py-4 cursor-pointer"
-                      onClick={() =>
-                        downloadImage(participant.driver_license_file)
-                      }
-                    >
-                      Descargar
-                    </td>
-                    <td
-                      className="px-6 py-4 cursor-pointer"
-                      onClick={() =>
-                        downloadImage(participant.paid_justification_file)
-                      }
-                    >
-                      Descargar
-                    </td> */}
-                    <td
-                      onClick={() => downloadPdf(participant)}
-                      className="px-6 py-4 text-center cursor-pointer"
-                    >
-                      Descargar PDF
-                    </td>
-                  </tr>
+                {Object.keys(groupedParticipants).map((team) => (
+                  <React.Fragment key={team}>
+                    <tr className='bg-gray-900'>
+                      <td
+                        colSpan={8}
+                        className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        Equipo: {team} ({groupedParticipants[team].length}{' '}
+                        pilotos)
+                      </td>
+                    </tr>
+                    {groupedParticipants[team].map((participant) => (
+                      <tr
+                        key={participant.driver_nif}
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <td className="px-6 py-4">{participant.category}</td>
+                        <td className="px-6 py-4">{participant.driver_name}</td>
+                        <td className="px-6 py-4">
+                          {participant.driver_lastname}
+                        </td>
+                        <td className="px-6 py-4">{participant.driver_nif}</td>
+                        <td className="px-6 py-4">
+                          {participant.driver_birthdate}
+                        </td>
+                        <td className="px-6 py-4">
+                          {participant.driver_phone}
+                        </td>
+                        <td className="px-6 py-4">{participant.driver_team}</td>
+                        <td
+                          onClick={() => downloadPdf(participant)}
+                          className="px-6 py-4 text-center cursor-pointer"
+                        >
+                          Descargar PDF
+                        </td>
+                      </tr>
+                    ))}
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
           </div>
-          {pdf ? (
+          <div className="text-right mt-5">
+            <p className="text-lg font-bold">Total de equipos: {totalTeams}</p>
+          </div>
+          {pdf && selectedParticipant && (
             <section className="fixed inset-0 flex items-center justify-center z-50 mt-[200px]">
               <div className="bg-white p-5 rounded-md flex flex-col gap-3 relative">
                 <div className="ml-auto">
@@ -166,12 +136,12 @@ function RentParticipants() {
                     Cerrar
                   </button>
                 </div>
-                <PDFViewer width="1000" height="650">
+                <PDFViewer style={{ width: '60vw', height: '60vh' }}>
                   <PdfReader participant={selectedParticipant} />
                 </PDFViewer>
               </div>
             </section>
-          ) : null}
+          )}
         </>
       ) : (
         <Loader />

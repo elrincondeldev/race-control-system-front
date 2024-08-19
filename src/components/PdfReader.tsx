@@ -4,65 +4,44 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    padding: 20,
+    padding: 10,
   },
   columnContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   section: {
-    width: '45%',
-    margin: 10,
-    padding: 10,
+    width: '100%',
+    marginBottom: 10,
+    padding: 8,
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
+    // Adjust margin and padding for smaller screens
   },
   main_section: {
     width: '100%',
-    margin: 10,
-    padding: 10,
+    margin: 5,
+    padding: 8,
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
   },
   heading: {
-    fontSize: 16,
+    fontSize: 14, // Adjust font size for better readability on small screens
     fontWeight: 'bold',
     marginBottom: 5,
   },
   label: {
-    fontSize: 12,
-    marginBottom: 3,
+    fontSize: 10, // Adjust font size for better readability on small screens
+    marginBottom: 2,
   },
   value: {
-    fontSize: 12,
-    marginBottom: 10,
+    fontSize: 10, // Adjust font size for better readability on small screens
+    marginBottom: 8,
   },
 });
 
-interface ParticipantType {
-  contestant_name: string;
-  contestant_manager: string;
-  contestant_license: string;
-  contestant_nif: string;
-  contestant_email: string;
-  contestant_phone: string;
-  driver_name: string;
-  driver_last_name: string;
-  driver_license: string;
-  driver_nif: string;
-  driver_province: string;
-  driver_country: string;
-  driver_birthdate: string;
-  driver_phone: string;
-  chasis: string;
-  first_engine: string;
-  second_engine: string;
-  transponder: string;
-  transponder_number: string;
-  dorsal: string;
-}
-
-function PdfReader({ participant }: { participant: ParticipantType | null }) {
+function PdfReader({ participant }: { participant: any | null }) {
   if (!participant) {
     return (
       <Document>

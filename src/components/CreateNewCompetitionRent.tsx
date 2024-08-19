@@ -10,40 +10,7 @@ function CreateNewCompetitionRent() {
   const [regulationLink, setRegulationLink] = useState('');
   const [date, setDate] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  // const [image, setImage] = useState<File | null>(null);
   const [categories, setCategories] = useState<string[]>([]);
-
-  // const formatCompetitionName = (name: string) => {
-  //   const withoutAccents = name
-  //     .normalize('NFD')
-  //     .replace(/[\u0300-\u036f]/g, '');
-  //   return withoutAccents.trim().toLowerCase().replace(/\s+/g, '_');
-  // };
-
-  // const compressImage = async (
-  //   imageFile: string | File | null,
-  // ): Promise<File | null> => {
-  //   if (!imageFile) return null;
-  //   const options = {
-  //     maxSizeMB: 1,
-  //     maxWidthOrHeight: 1024,
-  //     useWebWorker: true,
-  //     fileType: 'image/jpeg',
-  //   };
-  //   try {
-  //     const file = imageFile instanceof File ? imageFile : new File([], '');
-  //     const compressedBlob = await imageCompression(file, options);
-  //     const compressedFile = new File(
-  //       [compressedBlob],
-  //       file.name.replace(/\.[^.]+$/, '.jpg'), // Replace file extension with .jpg
-  //       { type: 'image/jpeg', lastModified: Date.now() },
-  //     );
-  //     return compressedFile;
-  //   } catch (error) {
-  //     console.error('Error compressing image:', error);
-  //     return imageFile instanceof File ? imageFile : null;
-  //   }
-  // };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -51,13 +18,15 @@ function CreateNewCompetitionRent() {
     if (
       !competitionName ||
       !inscriptionPrice ||
-      !regulationLink ||
       !date ||
       categories.length === 0
     ) {
       toast.error('Por favor, rellena todos los campos');
       return;
     }
+
+    const defaultRegulationLink = 'www.racecontrolsystem.com';
+    const finalRegulationLink = regulationLink || defaultRegulationLink;
 
     const competitionData = {
       competition: {
@@ -66,7 +35,7 @@ function CreateNewCompetitionRent() {
         date: date,
         active: true,
         inscription_price: inscriptionPrice,
-        regulation_url: regulationLink,
+        regulation_url: finalRegulationLink,
       },
     };
 
@@ -97,10 +66,13 @@ function CreateNewCompetitionRent() {
         <Loader />
       ) : (
         <>
-          <label className="ethnocentric text-4xl" htmlFor="contestant">
+          <label
+            className="ethnocentric text-2xl text-center"
+            htmlFor="contestant"
+          >
             Ajustes competición de alquiler
           </label>
-          <div className="flex gap-7">
+          <div className="flex flex-col lg:flex-row gap-7">
             <div className="flex flex-col w-full">
               <label htmlFor="name">Nombre de la competición</label>
               <input
@@ -113,10 +85,12 @@ function CreateNewCompetitionRent() {
               />
             </div>
             <div className="flex flex-col w-full">
-              <label htmlFor="categories">Categorías</label>
+              <label htmlFor="categories">
+                Categorías separadas por , (ejemplo: 85 kg, 90 kg)
+              </label>
               <input
                 id="categories"
-                value={categories.join(', ')} // Display the array as a comma-separated string
+                value={categories.join(', ')}
                 name="categories"
                 type="text"
                 className="shadow-lg p-3 rounded-md"
@@ -128,7 +102,7 @@ function CreateNewCompetitionRent() {
               />
             </div>
           </div>
-          <div className="flex gap-7">
+          <div className="flex flex-col lg:flex-row gap-7">
             <div className="flex flex-col w-full">
               <label htmlFor="inscriptionPrice">
                 Precio de la inscripción €
@@ -154,7 +128,7 @@ function CreateNewCompetitionRent() {
               />
             </div>
           </div>
-          <div className="flex gap-7">
+          <div className="flex flex-col lg:flex-row gap-7">
             <div className="flex flex-col w-full">
               <label htmlFor="date">Fecha de la competición</label>
               <input

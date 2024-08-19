@@ -49,7 +49,7 @@ export const participantServices = {
       const response = await axios.get(
         `${BACKEND_URL}competition/competitions-active`,
       );
-      console.log(response);
+
       return response;
     } catch (error) {
       console.log(error);
@@ -77,9 +77,6 @@ export const participantServices = {
       },
     };
 
-    console.log(data);
-    console.log(token);
-
     try {
       const response = await axios.post(
         `${BACKEND_URL}competition/create-competition`,
@@ -99,7 +96,7 @@ export const participantServices = {
         `${BACKEND_URL}participant/register-participant`,
         data,
       );
-      console.log(response);
+
       return response;
     } catch (error) {
       console.log(error);

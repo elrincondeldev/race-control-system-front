@@ -2,14 +2,12 @@ import Header from '../components/Header';
 import { useState } from 'react';
 import CreateNewCompetitionRent from '../components/CreateNewCompetitionRent';
 import Participants from '../components/Participants';
-
 import CompetitionManagementRent from '../components/CompetitionManagementRent';
 import RentParticipants from '../components/RentParticipants';
 
 function Dashboard() {
   const [view, setView] = useState('rent-participants');
   const [participantsModal, setParticipantsModal] = useState(false); // Controla el modal de Participants
-  // const [modifyCompetitionModal, setModifyCompetitionModal] = useState(false); // Controla el modal de ModifyCompetition
 
   const renderView = () => {
     if (view === 'new-competition-rent') {
@@ -24,41 +22,38 @@ function Dashboard() {
   return (
     <main className="relative">
       <Header />
-      <div className="flex flex-col gap-5 px-10 z-10 animate-in">
-        <section className="flex gap-5">
+      <div className="flex flex-col gap-5 px-5 md:px-10 z-10 animate-in">
+        <section className="flex flex-col sm:flex-row gap-3 sm:gap-5">
           <button
-            className={
+            className={`p-3 px-4 md:px-5 rounded-md transition ${
               view === 'rent-participants'
-                ? 'p-3 px-5 bg-black rounded-md text-white'
-                : 'p-3 px-5 bg-gray-300 rounded-md text-black'
-            }
+                ? 'bg-black text-white'
+                : 'bg-gray-300 text-black'
+            }`}
             onClick={() => setView('rent-participants')}
           >
             Todos los participantes
           </button>
           <button
-            className={
+            className={`p-3 px-4 md:px-5 rounded-md transition ${
               view === 'competitions-rent'
-                ? 'p-3 px-5 bg-black rounded-md text-white'
-                : 'p-3 px-5 bg-gray-300 rounded-md text-black'
-            }
+                ? 'bg-black text-white'
+                : 'bg-gray-300 text-black'
+            }`}
             onClick={() => setView('competitions-rent')}
           >
             Competiciones
           </button>
           <button
-            className={
+            className={`p-3 px-4 md:px-5 rounded-md transition ${
               view === 'new-competition-rent'
-                ? 'p-3 px-5 bg-black rounded-md text-white'
-                : 'p-3 px-5 bg-gray-300 rounded-md text-black'
-            }
+                ? 'bg-black text-white'
+                : 'bg-gray-300 text-black'
+            }`}
             onClick={() => setView('new-competition-rent')}
           >
             Crear nueva competición
           </button>
-          {/* {view === 'participants' || view === 'rent-participants' ? (
-            <DownloadCSV />
-          ) : null} */}
         </section>
         {renderView()}
       </div>
@@ -68,12 +63,6 @@ function Dashboard() {
           closeModal={() => setParticipantsModal(false)}
         />
       )}
-      {/* {modifyCompetitionModal && (
-        <ModifyCompetition
-          modifyCompetition={{}}
-          closeModal={() => setModifyCompetitionModal(false)}
-        />
-      )} */}
     </main>
   );
 }
