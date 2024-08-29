@@ -265,7 +265,7 @@ function RegisterRentParticipant() {
             causado así como la expulsión del evento.
           </p>
           <a
-            href={regulationUrl}
+            href={'https://' + regulationUrl}
             target="_blank"
             className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
           >
