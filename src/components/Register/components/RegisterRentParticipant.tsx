@@ -53,6 +53,7 @@ function RegisterRentParticipant() {
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
+  const [regulationUrl, setRegulationUrl] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,6 +64,7 @@ function RegisterRentParticipant() {
         setCompetitionName(response.data[0].competition_name);
         setPrice(response.data[0].inscription_price);
         setDate(response.data[0].date);
+        setRegulationUrl(response.data[0].regulation_url);
       }
     };
 
@@ -262,6 +264,13 @@ function RegisterRentParticipant() {
             correcto del material. Se podrá exigir al equipo el importe del daño
             causado así como la expulsión del evento.
           </p>
+          <a
+            href={regulationUrl}
+            target="_blank"
+            className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
+          >
+            Link al reglamento
+          </a>
           <p className="font-bold">Precio por equipo: {price} €</p>
           <p className="font-bold">Fecha de la competición: {date}</p>
         </div>

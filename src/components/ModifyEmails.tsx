@@ -11,8 +11,6 @@ function ModifyEmails() {
     setLoading(true);
   };
 
-  console.log(firstEmail, secondEmail);
-
   return (
     <form
       onSubmit={handleSubmit}

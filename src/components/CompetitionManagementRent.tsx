@@ -20,7 +20,6 @@ function CompetitionManagementRent() {
 
   const handleSaveCompetition = async (updatedCompetition: any) => {
     try {
-      console.log(updatedCompetition);
       await participantServices.modifyCompetition(updatedCompetition);
       const data = await participantServices.getCompetitions();
 
@@ -33,7 +32,6 @@ function CompetitionManagementRent() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await participantServices.getCompetitions();
-      console.log(data);
       setCompetitions(data?.data);
     };
 

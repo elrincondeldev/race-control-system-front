@@ -7,7 +7,6 @@ export const userServices = {
       const response = await axios.get(
         `${BACKEND_URL}auth/login?username=${data.username}&password=${data.password}`,
       );
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);

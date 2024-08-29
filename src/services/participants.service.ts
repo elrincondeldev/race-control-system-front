@@ -57,20 +57,20 @@ export const participantServices = {
   },
 
   async modifyCompetition(data: any) {
-    console.log('1', data);
     try {
       const token = getTokenFromLocalStorage();
 
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       };
 
       const response = await axios.post(
         `${BACKEND_URL}competition/modify-competition`,
+        { competition: data },
         config,
-        data,
       );
       return response;
     } catch (error) {
@@ -83,7 +83,7 @@ export const participantServices = {
 
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`, // Añadir el token al encabezado
+        Authorization: `Bearer ${token}`,
       },
     };
 
