@@ -57,9 +57,19 @@ export const participantServices = {
   },
 
   async modifyCompetition(data: any) {
+    console.log('1', data);
     try {
+      const token = getTokenFromLocalStorage();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
       const response = await axios.post(
         `${BACKEND_URL}competition/modify-competition`,
+        config,
         data,
       );
       return response;

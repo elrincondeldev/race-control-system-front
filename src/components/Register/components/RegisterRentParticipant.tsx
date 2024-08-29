@@ -146,6 +146,7 @@ function RegisterRentParticipant() {
       <h1 className="ethnocentric text-2xl sm:text-4xl text-center">
         {competitionName}
       </h1>
+      <img src="/images/main-image.jpeg" alt="" />
       <Category competitionCategories={comeptitionCategories} />
       <div className="flex flex-col gap-7 p-5 sm:p-7 bg-white rounded-md shadow-lg">
         <label
