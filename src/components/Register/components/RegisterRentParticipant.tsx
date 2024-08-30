@@ -6,6 +6,7 @@ import { participantServices } from '../../../services/participants.service';
 import toast from 'react-hot-toast';
 import 'react-phone-number-input/style.css';
 import Loader from '../../Loader';
+import { Link } from 'react-router-dom';
 
 function RegisterRentParticipant() {
   const {
@@ -264,13 +265,13 @@ function RegisterRentParticipant() {
             correcto del material. Se podrá exigir al equipo el importe del daño
             causado así como la expulsión del evento.
           </p>
-          <a
-            href={'https://' + regulationUrl}
+          <Link
+            to="/regulation"
             target="_blank"
             className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
           >
             Link al reglamento
-          </a>
+          </Link>
           <p className="font-bold">Precio por equipo: {price} €</p>
           <p className="font-bold">Fecha de la competición: {date}</p>
         </div>
