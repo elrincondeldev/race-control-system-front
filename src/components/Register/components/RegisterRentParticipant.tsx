@@ -54,7 +54,6 @@ function RegisterRentParticipant() {
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
-  const [regulationUrl, setRegulationUrl] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +64,6 @@ function RegisterRentParticipant() {
         setCompetitionName(response.data[0].competition_name);
         setPrice(response.data[0].inscription_price);
         setDate(response.data[0].date);
-        setRegulationUrl(response.data[0].regulation_url);
       }
     };
 
