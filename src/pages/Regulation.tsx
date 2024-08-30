@@ -58,7 +58,7 @@ const Reglamento = () => {
           <li>El precio de la inscripción se fija en 210 €.</li>
           <li>
             El pago de la inscripción se realizará por transferencia a la
-            cuenta: ES72 2100 2304 9002 0061 1568. Enviar justificante a
+            cuenta: ES65 2100 2304 9002 0051 2560. Enviar justificante a
             reservasgokartporrino@gmail.com.
           </li>
           <li>
