@@ -63,7 +63,16 @@ function RegisterRentParticipant() {
         setCompetitionCategories(response.data[0].categories);
         setCompetitionName(response.data[0].competition_name);
         setPrice(response.data[0].inscription_price);
-        setDate(response.data[0].date);
+
+        // Formatear la fecha aquí antes de setearla
+        const rawDate = new Date(response.data[0].date);
+        const formattedDate = rawDate.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        });
+
+        setDate(formattedDate);
       }
     };
 
