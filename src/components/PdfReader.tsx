@@ -84,6 +84,8 @@ function PdfReader({ participant }: { participant: any | null }) {
               <Text style={styles.value}>{participant.driver_nif}</Text>
               <Text style={styles.label}>Provincia del Piloto:</Text>
               <Text style={styles.value}>{participant.driver_province}</Text>
+              <Text style={styles.label}>Email del piloto:</Text>
+              <Text style={styles.value}>{participant.driver_email}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.label}>País del Piloto:</Text>

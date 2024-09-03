@@ -20,6 +20,8 @@ function RentParticipants() {
       const response = await participantServices.getParticipants();
       const participants: ParticipantType[] = response?.data || [];
 
+      console.log(participants);
+
       const teams = participants.reduce<ParticipantsGrouped>(
         (acc, participant) => {
           const team = participant.driver_team || 'Sin equipo';
