@@ -82,10 +82,10 @@ function RentParticipants() {
               <tbody>
                 {Object.keys(groupedParticipants).map((team) => (
                   <React.Fragment key={team}>
-                    <tr className='bg-gray-900'>
+                    <tr className="bg-gray-900">
                       <td
                         colSpan={8}
-                        className="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-bold whitespace-nowrap text-white"
                       >
                         Equipo: {team} ({groupedParticipants[team].length}{' '}
                         pilotos)
@@ -94,7 +94,7 @@ function RentParticipants() {
                     {groupedParticipants[team].map((participant) => (
                       <tr
                         key={participant.driver_nif}
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        className="bg-white border-b dark:bg-gray-800 border-gray-700"
                       >
                         <td className="px-6 py-4">{participant.category}</td>
                         <td className="px-6 py-4">{participant.driver_name}</td>
