@@ -156,6 +156,9 @@ function RegisterRentParticipant() {
       <h1 className="ethnocentric text-2xl sm:text-4xl text-center">
         {competitionName}
       </h1>
+      <h2 className="ethnocentric text-2xl sm:text-4xl text-center">
+        EVENTO CERRADO
+      </h2>
       <img src="/images/main-image.jpeg" alt="" />
       <Category competitionCategories={comeptitionCategories} />
       <div className="flex flex-col gap-7 p-5 sm:p-7 bg-white rounded-md shadow-lg">
@@ -291,6 +294,7 @@ function RegisterRentParticipant() {
         ) : (
           <input
             type="submit"
+            disabled={true}
             value="Enviar Inscripción"
             className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
           />
