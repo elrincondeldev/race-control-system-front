@@ -3,6 +3,7 @@ import { participantServices } from '../services/participants.service';
 import PdfReader from './PdfReader';
 import { PDFViewer } from '@react-pdf/renderer';
 import Loader from './Loader';
+import DownloadCSV from './DownloadCSV';
 
 import { ParticipantType, ParticipantsGrouped } from './types';
 
@@ -124,6 +125,7 @@ function RentParticipants() {
               </tbody>
             </table>
           </div>
+          <DownloadCSV />
           <div className="text-right mt-5">
             <p className="text-lg font-bold">Total de equipos: {totalTeams}</p>
           </div>

@@ -22,14 +22,12 @@ function DownloadCSV() {
     let str = '';
     let row = '';
 
-    // Encabezados de las columnas
     for (const index in array[0]) {
       row += index + ',';
     }
     row = row.slice(0, -1);
     str += row + '\r\n';
 
-    // Datos de las filas
     for (let i = 0; i < array.length; i++) {
       let line = '';
       for (const index in array[i]) {
