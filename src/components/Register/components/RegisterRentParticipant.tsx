@@ -160,146 +160,149 @@ function RegisterRentParticipant() {
         EVENTO CERRADO
       </h2>
       <img src="/images/main-image.jpeg" alt="" />
-      <Category competitionCategories={comeptitionCategories} />
-      <div className="flex flex-col gap-7 p-5 sm:p-7 bg-white rounded-md shadow-lg">
-        <label
-          className="ethnocentric text-xl sm:text-4xl"
-          htmlFor="contestant"
-        >
-          Piloto
-        </label>
-        <div className="flex flex-col sm:flex-row gap-7">
-          <div className="flex flex-col w-full">
-            <label htmlFor="name">Nombre</label>
-            <input
-              id="name"
-              placeholder="Nombre del piloto"
-              value={driverName}
-              name="name"
-              type="text"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setDriverName(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="last-name">Apellidos</label>
-            <input
-              placeholder="Apellidos del piloto"
-              id="last-name"
-              name="last-name"
-              value={driverLastName}
-              type="text"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setDriverLastName(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-7">
-          <div className="flex flex-col w-full">
-            <label htmlFor="nif">NIF</label>
-            <input
-              placeholder="Número de identificación fiscal del piloto"
-              id="nif"
-              name="nif"
-              value={driverNif}
-              type="text"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setDriverNif(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="telephone">Teléfono</label>
-            <PhoneInput
-              className="shadow-lg p-3 rounded-md"
-              placeholder="Introduce tu número de teléfono"
-              value={driverTelephone}
-              onChange={(value) => setDriverTelephone(value as Value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-7">
-          <div className="flex flex-col w-full">
-            <label htmlFor="date">Fecha de nacimiento</label>
-            <input
-              id="date"
-              placeholder="Fecha de nacimiento del piloto"
-              name="date"
-              value={driverBirthDate}
-              type="date"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setDriverBirthDate(e.target.value)}
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              value={email}
-              name="email"
-              type="email"
-              placeholder="Introduce el email del piloto"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col gap-7">
-          <div className="flex flex-col w-full">
-            <label>Nombre del equipo</label>
-            <input
-              id="team"
-              value={driver_team}
-              name="team"
-              type="text"
-              placeholder="Introduce el nombre del equipo"
-              className="shadow-lg p-3 rounded-md"
-              onChange={(e) => setDriverTeam(e.target.value)}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col items-center gap-4 m-auto">
-          <div className="flex gap-3">
-            <input
-              id="terms"
-              name="terms"
-              type="checkbox"
-              className="p-3 rounded-md"
-              onChange={(e) => setTermsAndConditions(e.target.checked)}
-            />
-            <label htmlFor="terms" className="font-bold">
-              Acepto los términos y condiciones
-            </label>
-          </div>
-          <p className="text-center text-sm sm:text-base">
-            El equipo declara conocer las normas de competición, así como el uso
-            correcto del material. Se podrá exigir al equipo el importe del daño
-            causado así como la expulsión del evento.
-          </p>
-          <Link
-            to="/regulation"
-            target="_blank"
-            className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
+      <section className='hidden'>
+        {' '}
+        <Category competitionCategories={comeptitionCategories} />
+        <div className="flex flex-col gap-7 p-5 sm:p-7 bg-white rounded-md shadow-lg">
+          <label
+            className="ethnocentric text-xl sm:text-4xl"
+            htmlFor="contestant"
           >
-            Link al reglamento
-          </Link>
-          <p className="font-bold">Precio por equipo: {price} €</p>
-          <p className="font-bold">Fecha de la competición: {date}</p>
-        </div>
-      </div>
-      <div className="m-auto">
-        {loading ? (
-          <div className="bg-black text-white py-4 px-6 rounded-md hover:bg-[#222]">
-            <Loader />
+            Piloto
+          </label>
+          <div className="flex flex-col sm:flex-row gap-7">
+            <div className="flex flex-col w-full">
+              <label htmlFor="name">Nombre</label>
+              <input
+                id="name"
+                placeholder="Nombre del piloto"
+                value={driverName}
+                name="name"
+                type="text"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setDriverName(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col w-full">
+              <label htmlFor="last-name">Apellidos</label>
+              <input
+                placeholder="Apellidos del piloto"
+                id="last-name"
+                name="last-name"
+                value={driverLastName}
+                type="text"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setDriverLastName(e.target.value)}
+              />
+            </div>
           </div>
-        ) : (
-          <input
-            type="submit"
-            disabled={true}
-            value="Enviar Inscripción"
-            className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
-          />
-        )}
-      </div>
+          <div className="flex flex-col sm:flex-row gap-7">
+            <div className="flex flex-col w-full">
+              <label htmlFor="nif">NIF</label>
+              <input
+                placeholder="Número de identificación fiscal del piloto"
+                id="nif"
+                name="nif"
+                value={driverNif}
+                type="text"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setDriverNif(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col w-full">
+              <label htmlFor="telephone">Teléfono</label>
+              <PhoneInput
+                className="shadow-lg p-3 rounded-md"
+                placeholder="Introduce tu número de teléfono"
+                value={driverTelephone}
+                onChange={(value) => setDriverTelephone(value as Value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-7">
+            <div className="flex flex-col w-full">
+              <label htmlFor="date">Fecha de nacimiento</label>
+              <input
+                id="date"
+                placeholder="Fecha de nacimiento del piloto"
+                name="date"
+                value={driverBirthDate}
+                type="date"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setDriverBirthDate(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col w-full">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                value={email}
+                name="email"
+                type="email"
+                placeholder="Introduce el email del piloto"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-7">
+            <div className="flex flex-col w-full">
+              <label>Nombre del equipo</label>
+              <input
+                id="team"
+                value={driver_team}
+                name="team"
+                type="text"
+                placeholder="Introduce el nombre del equipo"
+                className="shadow-lg p-3 rounded-md"
+                onChange={(e) => setDriverTeam(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-4 m-auto">
+            <div className="flex gap-3">
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                className="p-3 rounded-md"
+                onChange={(e) => setTermsAndConditions(e.target.checked)}
+              />
+              <label htmlFor="terms" className="font-bold">
+                Acepto los términos y condiciones
+              </label>
+            </div>
+            <p className="text-center text-sm sm:text-base">
+              El equipo declara conocer las normas de competición, así como el
+              uso correcto del material. Se podrá exigir al equipo el importe
+              del daño causado así como la expulsión del evento.
+            </p>
+            <Link
+              to="/regulation"
+              target="_blank"
+              className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
+            >
+              Link al reglamento
+            </Link>
+            <p className="font-bold">Precio por equipo: {price} €</p>
+            <p className="font-bold">Fecha de la competición: {date}</p>
+          </div>
+        </div>
+        <div className="m-auto">
+          {loading ? (
+            <div className="bg-black text-white py-4 px-6 rounded-md hover:bg-[#222]">
+              <Loader />
+            </div>
+          ) : (
+            <input
+              type="submit"
+              disabled={true}
+              value="Enviar Inscripción"
+              className="bg-black text-white py-4 px-6 rounded-md cursor-pointer hover:bg-[#222]"
+            />
+          )}
+        </div>
+      </section>
     </form>
   );
 }
